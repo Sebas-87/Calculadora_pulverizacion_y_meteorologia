@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Cálculo de Agroquímicos</title>
+</head>
+
+<body>
+    <h1>Simulador de Cálculo de Agroquímicos</h1>
+
+    <form>
+        <label for="nombre">Nombre del agroquímico:</label>
+        <input type="text" id="nombre" name="nombre" required>
+        <br>
+        <label for="superficie">Superficie en hectáreas:</label>
+        <input type="number" id="superficie" name="superficie" required>
+        <br>
+        <label for="dosis">Dosis de agroquímico en litros por hectárea:</label>
+        <input type="number" id="dosis" name="dosis" required>
+        <br>
+        <label for="unidad">Unidad de medida:</label>
+        <select id="unidad" name="unidad">
+            <option value="kg">kg</option>
+            <option value="lts">lts</option>
+        </select>
+        <br>
+        <button type="button" onclick="calcularAgroquimicos()">Calcular</button>
+    </form>
+    <style>
+        tr th,
+        tr td {
+            border-right: 1px solid black;
+        }
+    </style>
+    <table id="resultados">
+        <tr>
+            <th>Cálculo</th><br>
+            <th>Nombre del agroquímico</th>
+            <th>Superficie (hectáreas)</th>
+            <th>Dosis</th>
+            <th>Unidad de medida</th>
+            <th>Cantidad de agroquímicos</th>
+        </tr>
+
+    </table>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
