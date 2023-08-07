@@ -73,6 +73,11 @@ function calcularCantidadCaldo() {
         return;
     }
 
+    if (hectareasTotales < 0 || litrosPorHectarea < 0) {
+        alert("Los valores de hectareas y litros deben ser positivos.");
+        return;
+    }
+
     const cantidadCaldo = hectareasTotales * litrosPorHectarea;
 
     const caldoContainer = document.getElementById("caldoContainer");
@@ -97,6 +102,11 @@ function calcularPulverizacion() {
             cantidad: parseFloat(agroquimicoDiv.querySelector("input[type='number']").value),
             unidad: agroquimicoDiv.querySelector("#unidadDosis").value,
         };
+
+        if (agroquimico.cantidad < 0) {
+            alert("Ingrese un valor positivo para el agroquímico: " + agroquimico.nombre);
+            return;
+        }
 
         agroquimicos.push(agroquimico);
     }
