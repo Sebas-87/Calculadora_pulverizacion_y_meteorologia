@@ -4,47 +4,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador de Cálculo de Agroquímicos</title>
+    <title>Document</title>
 </head>
 
 <body>
-    <h1>Simulador de Cálculo de Agroquímicos</h1>
+    <h1>Calculadora de Pulverización</h1>
 
-    <form>
-        <label for="nombre">Nombre del agroquímico:</label>
-        <input type="text" id="nombre" name="nombre" required>
-        <br>
-        <label for="superficie">Superficie en hectáreas:</label>
-        <input type="number" id="superficie" name="superficie" required>
-        <br>
-        <label for="dosis">Dosis de agroquímico en litros por hectárea:</label>
-        <input type="number" id="dosis" name="dosis" required>
-        <br>
-        <label for="unidad">Unidad de medida:</label>
-        <select id="unidad" name="unidad">
-            <option value="kg">kg</option>
-            <option value="lts">lts</option>
-        </select>
-        <br>
-        <button type="button" onclick="calcularAgroquimicos()">Calcular</button>
-    </form>
-    <style>
-        tr th,
-        tr td {
-            border-right: 1px solid black;
-        }
-    </style>
-    <table id="resultados">
-        <tr>
-            <th>Cálculo</th><br>
-            <th>Nombre del agroquímico</th>
-            <th>Superficie (hectáreas)</th>
-            <th>Dosis</th>
-            <th>Unidad de medida</th>
-            <th>Cantidad de agroquímicos</th>
-        </tr>
+    <h2>Información del Lote o Carga</h2>
+    <label for="hectareasTotales">Hectáreas Totales:</label>
+    <input type="number" id="hectareasTotales" min="0" step="0.01">
+    <br>
+    <label for="litrosPorHectarea">Litros por Hectárea de Caldo:</label>
+    <input type="number" id="litrosPorHectarea" min="0" step="0.01">
+    <br>
+    <button onclick="calcularCantidadCaldo()">Calcular Cantidad de Caldo</button>
 
-    </table>
+    <h2>Agroquímicos</h2>
+    <div id="agroquimicosContainer">
+        <div class="agroquimico">
+            <input type="text" placeholder="Nombre del agroquímico">
+            <select onchange="calcularCantidadAgroquimico(this)">
+                <option value="Bolsas hidrosolubles">Bolsas hidrosolubles</option>
+                <option value="Polvos mojables (WP)">Polvos mojables (WP)</option>
+                <option value="Granulados dispersables (WG)">Granulados dispersables (WG)</option>
+                <option value="Granulados solubles (SG)">Granulados solubles (SG)</option>
+                <option value="Dispersiones oleosas (OD)">Dispersiones oleosas (OD)</option>
+                <option value="Suspensiones concentradas (SC)">Suspensiones concentradas (SC)</option>
+                <option value="Formulaciones (ZC)">Formulaciones (ZC)</option>
+                <option value="Suspensiones de encapsulados (CS)">Suspensiones de encapsulados (CS)</option>
+                <option value="Suspo-emulsiones (SE)">Suspo-emulsiones (SE)</option>
+                <option value="Emulsiones de aceite en agua (EW)">Emulsiones de aceite en agua (EW)</option>
+                <option value="Concentrados emulsionables (EC)">Concentrados emulsionables (EC)</option>
+                <option value="Concentrados solubles (SL)">Concentrados solubles (SL)</option>
+                <option value="Otros adyuvantes como aceites/surfactantes">Otros adyuvantes como aceites/surfactantes
+                </option>
+                <option value="Micro nutrientes/fertilizantes foliares">Micro nutrientes/fertilizantes foliares</option>
+            </select>
+            <input type="number" placeholder="Cantidad">
+            <select id="unidadDosis">
+                <option value="litros">Litros</option>
+                <option value="kilogramos">Kilogramos</option>
+            </select>
+            <button onclick="eliminarAgroquimico()">Eliminar</button>
+        </div>
+    </div>
+    <button onclick="agregarAgroquimico()">Agregar Agroquímico</button>
+
+    <br>
+    <button onclick="calcularPulverizacion()">Calcular Pulverización</button>
+
+    <!-- Botón "Guardar Cálculo" -->
+    <button onclick="guardarPulverizacion()">Guardar Cálculo</button>
+
+    <!-- Botón "Borrar lo guardado" -->
+    <button onclick="borrarLoGuardado()">Borrar lo guardado</button>
+
+    <!-- Botón "Mostrar Cálculo Guardado" -->
+    <div>
+        <button onclick="recuperarPulverizacionGuardada()">Ver lo Guardado</button>
+    </div>
+    <div id="calculoGuardadoContainer"></div>
+
+
+    <!-- Botón "Resetear Calculador" -->
+    <button onclick="resetearCalculador()">Resetear Calculador</button>
+
+    <h2>Resultados</h2>
+    <div id="caldoContainer"></div>
+    <div id="resultadosContainer"></div>
 
     <script src="main.js"></script>
 </body>
