@@ -91,6 +91,15 @@ function agregarAgroquimico() {
     const eliminarButton = document.createElement("button");
     eliminarButton.textContent = "Eliminar";
     eliminarButton.onclick = function () {
+
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Operación exitosa!',
+            showConfirmButton: false,
+            timer: 1300
+        })
+        
         agroquimicoDiv.remove(); // Cambio en esta línea para evitar eliminar los cálculos guardados.
     };
     agroquimicoDiv.appendChild(eliminarButton);
@@ -104,7 +113,7 @@ function calcularPulverizacion() {
     if (!hectareasTotales) {
         Swal.fire({
             icon: 'warning',
-            title: 'Por favor, ingrese un valor válido para las hectáreas totales!',
+            title: 'Por favor, ingrese un valor válido!',
         })
         return;
     }
@@ -169,39 +178,16 @@ function guardarPulverizacion() {
     localStorage.setItem("resultadoPulverizacion", resultadosPulverizacion);
 
     Swal.fire({
-        title: '¿Estas seguro de querer guardar los datos?',
-        icon: 'question',
-        showCancelButton: true,
-        confirmButtonColor: '#00FF00',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'SI, Guardar!'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'Cálculo guardado correctamente.',
-                showConfirmButton: false,
-                timer: 1250
-            })
-        }
+        position: 'center',
+        icon: 'success',
+        title: 'Cálculo guardado correctamente.',
+        showConfirmButton: false,
+        timer: 1250
     })
 }
 
-function recuperarPulverizacionGuardada() {
-    const cantidadCaldoGuardada = localStorage.getItem("cantidadCaldo");
-    const resultadosPulverizacionGuardados = localStorage.getItem("resultadoPulverizacion");
-
-    if (cantidadCaldoGuardada) {
-        document.getElementById("caldoContainer").innerHTML = cantidadCaldoGuardada;
-    }
-
-    if (resultadosPulverizacionGuardados) {
-        document.getElementById("resultadosContainer").innerHTML = resultadosPulverizacionGuardados;
-    }
-}
-
 function resetearCalculador() {
+
     document.getElementById("hectareasTotales").value = "";
     document.getElementById("litrosPorHectarea").value = "";
 
@@ -219,51 +205,99 @@ function resetearCalculador() {
     resultadosContainer.innerHTML = ""; // Limpiar resultados de la pantalla
 }
 
-function mostrarCalculoGuardado() {
-    const cantidadCaldoGuardada = localStorage.getItem("cantidadCaldo");
-    const resultadosPulverizacionGuardados = localStorage.getItem("resultadoPulverizacion");
-
-    const calculoGuardadoContainer = document.getElementById("calculoGuardadoContainer");
-    calculoGuardadoContainer.innerHTML = "";
-
-    if (cantidadCaldoGuardada) {
-        const cantidadCaldoDiv = document.createElement("div");
-        cantidadCaldoDiv.innerHTML = `<p>Cantidad de Caldo Necesaria (Guardada): ${cantidadCaldoGuardada}</p>`;
-        calculoGuardadoContainer.appendChild(cantidadCaldoDiv);
-    }
-
-    if (resultadosPulverizacionGuardados) {
-        const resultadosPulverizacionDiv = document.createElement("div");
-        resultadosPulverizacionDiv.innerHTML = `<p>Resultados de Pulverización (Guardados):</p>${resultadosPulverizacionGuardados}`;
-        calculoGuardadoContainer.appendChild(resultadosPulverizacionDiv);
-    }
-}
-
-// Esta función borra los datos guardados en la memoria.
-function borrarLoGuardado() {
-    localStorage.clear();
-
+function recuperarPulverizacionGuardada() {
     Swal.fire({
-        title: '¿Estas seguro de querer borrar los datos?',
-        text: "No sera posible despues de esta accion recuperar los datos!",
-        icon: 'warning',
+        title: 'Mostrar pulverización guardada',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'SI, borrar!'
+        confirmButtonText: 'Confirmar!'
     }).then((result) => {
         if (result.isConfirmed) {
+            const cantidadCaldoGuardada = localStorage.getItem("cantidadCaldo");
+            const resultadosPulverizacionGuardados = localStorage.getItem("resultadoPulverizacion");
+
+            if (cantidadCaldoGuardada) {
+                document.getElementById("caldoContainer").innerHTML = cantidadCaldoGuardada;
+            }
+
+            if (resultadosPulverizacionGuardados) {
+                document.getElementById("resultadosContainer").innerHTML = resultadosPulverizacionGuardados;
+            }
+
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Cálculo recuperado!',
+                showConfirmButton: false,
+                timer: 2000
+            });
+        }
+    });
+}
+//________________________________________
+// function mostrarCalculoGuardado() {
+//     Swal.fire({
+//         title: 'Mostrar pulverización guardada',
+//         showCancelButton: true,
+//         confirmButtonColor: '#3085d6',
+//         cancelButtonColor: '#d33',
+//         confirmButtonText: 'Confirmar!'
+//     }).then((result) => {
+//         if (result.isConfirmed) {
+//             const cantidadCaldoGuardada = localStorage.getItem("cantidadCaldo");
+//             const resultadosPulverizacionGuardados = localStorage.getItem("resultadoPulverizacion");
+
+//             const calculoGuardadoContainer = document.getElementById("calculoGuardadoContainer");
+//             calculoGuardadoContainer.innerHTML = "";
+
+//             if (cantidadCaldoGuardada) {
+//                 const cantidadCaldoDiv = document.createElement("div");
+//                 cantidadCaldoDiv.innerHTML = `<p>Cantidad de Caldo Necesaria: ${cantidadCaldoGuardada}</p>`;
+//                 calculoGuardadoContainer.appendChild(cantidadCaldoDiv);
+//             }
+
+//             if (resultadosPulverizacionGuardados) {
+//                 const resultadosPulverizacionDiv = document.createElement("div");
+//                 resultadosPulverizacionDiv.innerHTML = `<p>Resultados de Pulverización:</p>${resultadosPulverizacionGuardados}`;
+//                 calculoGuardadoContainer.appendChild(resultadosPulverizacionDiv);
+//             }
+
+//             Swal.fire({
+//                 position: 'center',
+//                 icon: 'success',
+//                 title: 'Se ha borrado correctamente.',
+//                 showConfirmButton: false,
+//                 timer: 2000
+//             });
+//         }
+//     });
+// }
+//________________________________________
+
+// Esta función borra los datos guardados en la memoria.
+function borrarLoGuardado() {
+    Swal.fire({
+        title: '¿Estás seguro de querer borrar los datos?',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, borrar!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            localStorage.clear(); // Borra los datos
+
             Swal.fire({
                 position: 'center',
                 icon: 'success',
                 title: 'Se ha borrado correctamente.',
                 showConfirmButton: false,
                 timer: 2000
-            })
-        }
-    })
+            });
 
-    // Actualiza la pantalla para mostrar que los datos se han borrado.
-    document.getElementById("caldoContainer").innerHTML = "";
-    document.getElementById("resultadosContainer").innerHTML = "";
+            // Actualiza la pantalla para mostrar que los datos se han borrado.
+            document.getElementById("caldoContainer").innerHTML = "";
+            document.getElementById("resultadosContainer").innerHTML = "";
+        }
+    });
 }
