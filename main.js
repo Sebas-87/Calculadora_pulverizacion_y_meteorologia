@@ -91,16 +91,27 @@ function agregarAgroquimico() {
     const eliminarButton = document.createElement("button");
     eliminarButton.textContent = "Eliminar";
     eliminarButton.onclick = function () {
-
         Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'Operación exitosa!',
-            showConfirmButton: false,
-            timer: 1300
-        })
-        
-        agroquimicoDiv.remove(); // Cambio en esta línea para evitar eliminar los cálculos guardados.
+            title: 'Confirmar',
+            text: '¿Estás seguro de que deseas eliminar este agroquímico?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                agroquimicoDiv.remove(); // Cambio en esta línea para evitar eliminar los cálculos guardados.
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Agroquímico eliminado',
+                    showConfirmButton: false,
+                    timer: 1300
+                });
+            }
+        });
     };
     agroquimicoDiv.appendChild(eliminarButton);
 
@@ -187,23 +198,36 @@ function guardarPulverizacion() {
 }
 
 function resetearCalculador() {
-
-    document.getElementById("hectareasTotales").value = "";
-    document.getElementById("litrosPorHectarea").value = "";
-
-    const agroquimicosDivs = document.querySelectorAll("#agroquimicosContainer .agroquimico");
-    for (const agroquimicoDiv of agroquimicosDivs) {
-        document.getElementById("agroquimicosContainer").removeChild(agroquimicoDiv);
-    }
-
-    ordenMezcla = 1;
-
-    const caldoContainer = document.getElementById("caldoContainer");
-    caldoContainer.innerHTML = ""; // Limpiar resultados de la pantalla
-
-    const resultadosContainer = document.getElementById("resultadosContainer");
-    resultadosContainer.innerHTML = ""; // Limpiar resultados de la pantalla
-}
+    Swal.fire({
+      icon: "warning",
+      title: "Confirmar reinicio",
+      text: "¿Estás seguro de que deseas reiniciar la calculadora?",
+      showCancelButton: true,
+      confirmButtonText: "Sí",
+      cancelButtonText: "Cancelar"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Restablecer valores de la calculadora
+        document.getElementById("hectareasTotales").value = "";
+        document.getElementById("litrosPorHectarea").value = "";
+  
+        const agroquimicosDivs = document.querySelectorAll("#agroquimicosContainer .agroquimico");
+        for (const agroquimicoDiv of agroquimicosDivs) {
+          document.getElementById("agroquimicosContainer").removeChild(agroquimicoDiv);
+        }
+  
+        ordenMezcla = 1;
+  
+        const caldoContainer = document.getElementById("caldoContainer");
+        caldoContainer.innerHTML = ""; // Limpiar resultados de la pantalla
+  
+        const resultadosContainer = document.getElementById("resultadosContainer");
+        resultadosContainer.innerHTML = ""; // Limpiar resultados de la pantalla
+  
+        Swal.fire("Reinicio completo", "", "success");
+      }
+    });
+  }
 
 function recuperarPulverizacionGuardada() {
     Swal.fire({
@@ -217,63 +241,31 @@ function recuperarPulverizacionGuardada() {
             const cantidadCaldoGuardada = localStorage.getItem("cantidadCaldo");
             const resultadosPulverizacionGuardados = localStorage.getItem("resultadoPulverizacion");
 
-            if (cantidadCaldoGuardada) {
-                document.getElementById("caldoContainer").innerHTML = cantidadCaldoGuardada;
-            }
+            if (!cantidadCaldoGuardada && !resultadosPulverizacionGuardados) {
+                Swal.fire({
+                    icon: 'info',
+                    title: 'No hay operaciones guardadas',
+                });
+            } else {
+                if (cantidadCaldoGuardada) {
+                    document.getElementById("caldoContainer").innerHTML = cantidadCaldoGuardada;
+                }
 
-            if (resultadosPulverizacionGuardados) {
-                document.getElementById("resultadosContainer").innerHTML = resultadosPulverizacionGuardados;
-            }
+                if (resultadosPulverizacionGuardados) {
+                    document.getElementById("resultadosContainer").innerHTML = resultadosPulverizacionGuardados;
+                }
 
-            Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'Cálculo recuperado!',
-                showConfirmButton: false,
-                timer: 2000
-            });
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Cálculo recuperado!',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+            }
         }
     });
 }
-//________________________________________
-// function mostrarCalculoGuardado() {
-//     Swal.fire({
-//         title: 'Mostrar pulverización guardada',
-//         showCancelButton: true,
-//         confirmButtonColor: '#3085d6',
-//         cancelButtonColor: '#d33',
-//         confirmButtonText: 'Confirmar!'
-//     }).then((result) => {
-//         if (result.isConfirmed) {
-//             const cantidadCaldoGuardada = localStorage.getItem("cantidadCaldo");
-//             const resultadosPulverizacionGuardados = localStorage.getItem("resultadoPulverizacion");
-
-//             const calculoGuardadoContainer = document.getElementById("calculoGuardadoContainer");
-//             calculoGuardadoContainer.innerHTML = "";
-
-//             if (cantidadCaldoGuardada) {
-//                 const cantidadCaldoDiv = document.createElement("div");
-//                 cantidadCaldoDiv.innerHTML = `<p>Cantidad de Caldo Necesaria: ${cantidadCaldoGuardada}</p>`;
-//                 calculoGuardadoContainer.appendChild(cantidadCaldoDiv);
-//             }
-
-//             if (resultadosPulverizacionGuardados) {
-//                 const resultadosPulverizacionDiv = document.createElement("div");
-//                 resultadosPulverizacionDiv.innerHTML = `<p>Resultados de Pulverización:</p>${resultadosPulverizacionGuardados}`;
-//                 calculoGuardadoContainer.appendChild(resultadosPulverizacionDiv);
-//             }
-
-//             Swal.fire({
-//                 position: 'center',
-//                 icon: 'success',
-//                 title: 'Se ha borrado correctamente.',
-//                 showConfirmButton: false,
-//                 timer: 2000
-//             });
-//         }
-//     });
-// }
-//________________________________________
 
 // Esta función borra los datos guardados en la memoria.
 function borrarLoGuardado() {
