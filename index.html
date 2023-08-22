@@ -31,22 +31,24 @@
                 <button onclick="calcularCantidadCaldo()" type="button" class="btn btn-success mt-3">Calcular Cantidad
                     de
                     Caldo</button>
-                    <div class="container">
-                        <div class="row justify-content-center">
-                          <div class="col-lg-6 col-md-8 col-sm-10 col-12">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6 col-md-8 col-sm-10 col-12">
                             <div class="card text-bg-secondary mt-3">
-                              <h4 class="card-header text-decoration-underline">Tanque del pulverizador</h4>
-                              <img src="assets/img/tank_level.webp" class="card-img-top object-fit-cover border rounded mt-2 img-fluid w-75 mx-auto" alt="gotas simulando nivel de agua en tanque
+                                <h4 class="card-header text-decoration-underline">Tanque del pulverizador</h4>
+                                <img src="assets/img/tank_level.webp"
+                                    class="card-img-top object-fit-cover border rounded mt-2 img-fluid w-75 mx-auto"
+                                    alt="gotas simulando nivel de agua en tanque
                               ">
-                              <div class="card-body text-dark" id="caldoContainer">
-                                <!-- Contenido generado por JavaScript -->
-                              </div>
+                                <div class="card-body text-dark" id="caldoContainer">
+                                    <!-- Contenido generado por JavaScript -->
+                                </div>
                             </div>
-                          </div>
                         </div>
-                      </div>
+                    </div>
+                </div>
             </div>
-             
+
             <hr>
 
             <h3>Agroquímicos</h3>
@@ -85,42 +87,59 @@
 
             <hr>
 
-            <div class="d-grid gap-2 col-6 mx-auto"></div>
-            <button onclick="calcularPulverizacion()" type="button" class="btn btn-success mt-3">Calcular
-                Pulverización</button>
+            
+                <button onclick="calcularPulverizacion()" type="button" class="btn btn-success mt-3">Calcular
+                    Pulverización</button>
 
-            <!-- Botón "Guardar Cálculo" -->
-            <button onclick="guardarPulverizacion()" type="button" class="btn btn-primary mt-3">Guardar Cálculo</button>
+                <!-- Botón "Guardar Cálculo" -->
+                <button onclick="guardarPulverizacion()" type="button" class="btn btn-primary mt-3">Guardar
+                    Cálculo</button>
 
-            <!-- Botón "Borrar lo guardado" -->
-            <button onclick="borrarLoGuardado()" type="button" class="btn btn-danger mt-3">Borrar lo guardado</button>
+                <!-- Botón "Borrar lo guardado" -->
+                <button onclick="borrarLoGuardado()" type="button" class="btn btn-danger mt-3">Borrar lo
+                    guardado</button>
 
-            <!-- Botón "Mostrar Cálculo Guardado" -->
+                <!-- Botón "Mostrar Cálculo Guardado" -->
 
-            <button onclick="recuperarPulverizacionGuardada()" type="button" class="btn btn-info mt-3">Ver
-                lo Guardado</button>
+                <button onclick="recuperarPulverizacionGuardada()" type="button" class="btn btn-info mt-3">Ver
+                    lo Guardado</button>
 
 
-            <!-- Botón "Resetear Calculador" -->
-            <button onclick="resetearCalculador()" type="button" class="btn btn-warning mt-3">Resetear
-                Calculador</button>
+                <!-- Botón "Resetear Calculador" -->
+                <button onclick="resetearCalculador()" type="button" class="btn btn-warning mt-3">Resetear
+                    Calculador</button>
+            
         </div>
 
 
-        <div class="container">
-            <div class="row justify-content-center"> 
-              <div class="col-lg-6 col-md-8 col-sm-10 col-12">
-                <div class="card text-bg-secondary mt-3">
-                  <h4 class="card-header text-decoration-underline text-center">Agroquímicos//Mezcla</h4>
-                  <img src="assets/img/ShaPID-Keyvisual.jpg" class="card-img-top object-fit-cover border rounded mt-2 img-fluid w-75 mx-auto" alt="....">
-                  <div class="card-body text-dark" id="resultadosContainer">
-                    <!-- Contenido generado por JavaScript -->
-                  </div>
+        <div class="container mb-4">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-8 col-sm-10 col-12">
+                    <div class="card text-bg-secondary mt-3">
+                        <h4 class="card-header text-decoration-underline text-center">Agroquímicos//Mezcla</h4>
+                        <img src="assets/img/ShaPID-Keyvisual.jpg"
+                            class="card-img-top object-fit-cover border rounded mt-2 img-fluid w-75 mx-auto" alt="....">
+                        <div class="card-body text-dark" id="resultadosContainer">
+                            <!-- Contenido generado por JavaScript -->
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
-          
+        </div>
+
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <button id="descargarButton" type="button" class="btn btn-success mt-3">Descargar Resultados</button>
+            <button id="compartirWhatsappButton" type="button" class="btn btn-info mt-3">Compartir en WhatsApp</button>
+        </div>
+
+    </div>
+
+    <div class="container-fluid">
+        <div class="row bg-dark text-white p-2">
+            <div class="col text-center">
+                <p>&copy; 2023 Sebas-87. Todos los derechos reservados.</p>
+            </div>
+        </div>
     </div>
 
     <script src="main.js"></script>

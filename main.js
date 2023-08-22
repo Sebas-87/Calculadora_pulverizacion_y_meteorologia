@@ -1,3 +1,4 @@
+// Función para calcular la cantidad de caldo total.
 function calcularCantidadCaldo() {
     const hectareasTotales = parseFloat(document.getElementById("hectareasTotales").value);
     const litrosPorHectarea = parseFloat(document.getElementById("litrosPorHectarea").value);
@@ -52,6 +53,7 @@ const tiposFormulacion = {
 
 let ordenMezcla = 1; // Contador de orden de mezcla
 
+// Función para agregar agroquímicos.
 function agregarAgroquimico() {
     const container = document.getElementById("agroquimicosContainer");
 
@@ -119,6 +121,7 @@ function agregarAgroquimico() {
     container.appendChild(agroquimicoDiv);
 }
 
+// Función para el calculo de la pulverización.
 function calcularPulverizacion() {
     const hectareasTotales = parseFloat(document.getElementById("hectareasTotales").value);
 
@@ -182,6 +185,7 @@ function calcularPulverizacion() {
     }
 }
 
+// Función para guardar los datos.
 function guardarPulverizacion() {
     const cantidadCaldo = document.getElementById("caldoContainer").innerHTML;
     const resultadosPulverizacion = document.getElementById("resultadosContainer").innerHTML;
@@ -198,45 +202,45 @@ function guardarPulverizacion() {
     })
 }
 
+// Función para resetaer datos de pantalla.
 function resetearCalculador() {
     Swal.fire({
-      icon: "warning",
-      title: "Confirmar reinicio",
-      text: "¿Estás seguro de que deseas reiniciar la calculadora?",
-      showCancelButton: true,
-      confirmButtonText: "Sí",
-      cancelButtonText: "Cancelar"
+        icon: "warning",
+        title: "Confirmar reinicio",
+        text: "¿Estás seguro de que deseas reiniciar la calculadora?",
+        showCancelButton: true,
+        confirmButtonText: "Sí",
+        cancelButtonText: "Cancelar"
     }).then((result) => {
-      if (result.isConfirmed) {
-        // Restablecer valores de la calculadora
-        document.getElementById("hectareasTotales").value = "";
-        document.getElementById("litrosPorHectarea").value = "";
-  
-        const agroquimicosDivs = document.querySelectorAll("#agroquimicosContainer .agroquimico");
-        for (const agroquimicoDiv of agroquimicosDivs) {
-          const inputsInsideDiv = agroquimicoDiv.querySelectorAll('input');
-          inputsInsideDiv.forEach(input => {
-            if (input.type === 'text' || input.type === 'number') {
-              input.value = '';
-            }
-          });
-        }
-        
-        
-  
-        ordenMezcla = 1;
-  
-        const caldoContainer = document.getElementById("caldoContainer");
-        caldoContainer.innerHTML = ""; // Limpiar resultados de la pantalla
-  
-        const resultadosContainer = document.getElementById("resultadosContainer");
-        resultadosContainer.innerHTML = ""; // Limpiar resultados de la pantalla
-  
-        Swal.fire("Reinicio completo", "", "success");
-      }
-    });
-  }
+        if (result.isConfirmed) {
+            // Restablecer valores de la calculadora
+            document.getElementById("hectareasTotales").value = "";
+            document.getElementById("litrosPorHectarea").value = "";
 
+            const agroquimicosDivs = document.querySelectorAll("#agroquimicosContainer .agroquimico");
+            for (const agroquimicoDiv of agroquimicosDivs) {
+                const inputsInsideDiv = agroquimicoDiv.querySelectorAll('input');
+                inputsInsideDiv.forEach(input => {
+                    if (input.type === 'text' || input.type === 'number') {
+                        input.value = '';
+                    }
+                });
+            }
+
+            ordenMezcla = 1;
+
+            const caldoContainer = document.getElementById("caldoContainer");
+            caldoContainer.innerHTML = ""; // Limpiar resultados de la pantalla
+
+            const resultadosContainer = document.getElementById("resultadosContainer");
+            resultadosContainer.innerHTML = ""; // Limpiar resultados de la pantalla
+
+            Swal.fire("Reinicio completo", "", "success");
+        }
+    });
+}
+
+// Función para recuperar los datos guardados en la memoria.
 function recuperarPulverizacionGuardada() {
     Swal.fire({
         title: 'Mostrar pulverización guardada',
@@ -275,7 +279,7 @@ function recuperarPulverizacionGuardada() {
     });
 }
 
-// Esta función borra los datos guardados en la memoria.
+// Función para borrar los datos guardados en la memoria.
 function borrarLoGuardado() {
     Swal.fire({
         title: '¿Estás seguro de querer borrar los datos?',
@@ -301,3 +305,37 @@ function borrarLoGuardado() {
         }
     });
 }
+
+// Función para descargar los resultados
+function descargarResultados() {
+    const contenidoCaldo = document.getElementById('caldoContainer').textContent;
+    const contenidoResultados = document.getElementById('resultadosContainer').textContent;
+
+    const contenidoTotal = `Resultados Caldo:\n${contenidoCaldo}\n\nResultados:\n${contenidoResultados}`;
+
+    const enlaceDescarga = document.createElement('a');
+    enlaceDescarga.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(contenidoTotal);
+    enlaceDescarga.download = 'resultados.txt';
+    enlaceDescarga.style.display = 'none';
+
+    document.body.appendChild(enlaceDescarga);
+    enlaceDescarga.click();
+    document.body.removeChild(enlaceDescarga);
+}
+
+// Función para compartir por WhatsApp
+function compartirWhatsapp() {
+    const contenidoCaldo = document.getElementById('caldoContainer').textContent;
+    const contenidoResultados = document.getElementById('resultadosContainer').textContent;
+
+    const contenidoTotal = `Resultados Caldo:\n${contenidoCaldo}\n\nResultados:\n${contenidoResultados}`;
+
+    const whatsappURL = `https://api.whatsapp.com/send?text=${encodeURIComponent(contenidoTotal)}`;
+    window.open(whatsappURL);
+}
+
+// Asigna la función de descarga al botón
+document.getElementById('descargarButton').addEventListener('click', descargarResultados);
+
+// Asigna la función de compartir en WhatsApp al botón
+document.getElementById('compartirWhatsappButton').addEventListener('click', compartirWhatsapp);
