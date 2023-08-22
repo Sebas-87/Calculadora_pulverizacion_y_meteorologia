@@ -5,75 +5,128 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
-    <h1>Calculadora de Pulverización</h1>
+    <div class="container-md p-4 img-container">
+        <h1 class="text-center mt-4">Calculadora de Pulverización</h1>
 
-    <h2>Información del Lote o Carga</h2>
-    <label for="hectareasTotales">Hectáreas Totales:</label>
-    <input type="number" id="hectareasTotales" min="0" step="0.01">
-    <br>
-    <label for="litrosPorHectarea">Dosis total de caldo en Lts/ha:</label>
-    <input type="number" id="litrosPorHectarea" min="0" step="0.01">
-    <br>
-    <button onclick="calcularCantidadCaldo()">Calcular Cantidad de Caldo</button>
+        <h2 class="text-center">Comenzemos!!!</h2>
+        <div class="container text-center">
+            <div class="row">
+                <div class="col">
+                    <h3 class="fs-6">Hectáreas Totales:</h3>
+                    <input type="number" id="hectareasTotales" min="0" step="0.01" class="form-control"
+                        aria-label="Cantidad de hectareas">
+                </div>
+                <div class="col">
+                    <h3 class="fs-6">Dosis caldo Lts/ha:</h3>
+                    <input type="number" id="litrosPorHectarea" min="0" step="0.01" class="form-control"
+                        aria-label="Dosis por hectarea">
+                </div>
+                <button onclick="calcularCantidadCaldo()" type="button" class="btn btn-success mt-3">Calcular Cantidad
+                    de
+                    Caldo</button>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                          <div class="col-lg-6 col-md-8 col-sm-10 col-12">
+                            <div class="card text-bg-secondary mt-3">
+                              <h4 class="card-header text-decoration-underline">Tanque del pulverizador</h4>
+                              <img src="assets/img/tank_level.webp" class="card-img-top object-fit-cover border rounded mt-2 img-fluid w-75 mx-auto" alt="gotas simulando nivel de agua en tanque
+                              ">
+                              <div class="card-body text-dark" id="caldoContainer">
+                                <!-- Contenido generado por JavaScript -->
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+            </div>
+             
+            <hr>
 
-    <h2>Agroquímicos</h2>
-    <div id="agroquimicosContainer">
-        <div class="agroquimico">
-            <input type="text" placeholder="Nombre del agroquímico">
-            <select onchange="calcularCantidadAgroquimico(this)">
-                <option value="Bolsas hidrosolubles">Bolsas hidrosolubles</option>
-                <option value="Polvos mojables (WP)">Polvos mojables (WP)</option>
-                <option value="Granulados dispersables (WG)">Granulados dispersables (WG)</option>
-                <option value="Granulados solubles (SG)">Granulados solubles (SG)</option>
-                <option value="Dispersiones oleosas (OD)">Dispersiones oleosas (OD)</option>
-                <option value="Suspensiones concentradas (SC)">Suspensiones concentradas (SC)</option>
-                <option value="Formulaciones (ZC)">Formulaciones (ZC)</option>
-                <option value="Suspensiones de encapsulados (CS)">Suspensiones de encapsulados (CS)</option>
-                <option value="Suspo-emulsiones (SE)">Suspo-emulsiones (SE)</option>
-                <option value="Emulsiones de aceite en agua (EW)">Emulsiones de aceite en agua (EW)</option>
-                <option value="Concentrados emulsionables (EC)">Concentrados emulsionables (EC)</option>
-                <option value="Concentrados solubles (SL)">Concentrados solubles (SL)</option>
-                <option value="Otros adyuvantes como aceites/surfactantes">Otros adyuvantes como aceites/surfactantes
-                </option>
-                <option value="Micro nutrientes/fertilizantes foliares">Micro nutrientes/fertilizantes foliares</option>
-            </select>
-            <input type="number" placeholder="Cantidad">
-            <select id="unidadDosis">
-                <option value="litros">Litros</option>
-                <option value="kilogramos">Kilogramos</option>
-            </select>
+            <h3>Agroquímicos</h3>
+            <div id="agroquimicosContainer">
+                <div class="agroquimico">
+                    <input type="text" placeholder="Nombre del agroquímico" class="form-control mb-1">
+                    <select onchange="calcularCantidadAgroquimico(this)" class="form-select">
+                        <option value="Bolsas hidrosolubles">Bolsas hidrosolubles</option>
+                        <option value="Polvos mojables (WP)">Polvos mojables (WP)</option>
+                        <option value="Granulados dispersables (WG)">Granulados dispersables (WG)</option>
+                        <option value="Granulados solubles (SG)">Granulados solubles (SG)</option>
+                        <option value="Dispersiones oleosas (OD)">Dispersiones oleosas (OD)</option>
+                        <option value="Suspensiones concentradas (SC)">Suspensiones concentradas (SC)</option>
+                        <option value="Formulaciones (ZC)">Formulaciones (ZC)</option>
+                        <option value="Suspensiones de encapsulados (CS)">Suspensiones de encapsulados (CS)</option>
+                        <option value="Suspo-emulsiones (SE)">Suspo-emulsiones (SE)</option>
+                        <option value="Emulsiones de aceite en agua (EW)">Emulsiones de aceite en agua (EW)</option>
+                        <option value="Concentrados emulsionables (EC)">Concentrados emulsionables (EC)</option>
+                        <option value="Concentrados solubles (SL)">Concentrados solubles (SL)</option>
+                        <option value="Otros adyuvantes como aceites/surfactantes">Otros adyuvantes como
+                            aceites/surfactantes
+                        </option>
+                        <option value="Micro nutrientes/fertilizantes foliares">Micro nutrientes/fertilizantes foliares
+                        </option>
+                    </select>
+                    <input type="number" placeholder="Cantidad" class="form-control mt-4 mb-1">
+                    <select id="unidadDosis" class="form-select">
+                        <option value="litros">Litros</option>
+                        <option value="kilogramos">Kilogramos</option>
+                    </select>
+                </div>
+            </div>
+
+            <button onclick="agregarAgroquimico()" type="button" class="btn btn-dark mt-3">Agregar
+                Agroquímico</button>
+
+            <hr>
+
+            <div class="d-grid gap-2 col-6 mx-auto"></div>
+            <button onclick="calcularPulverizacion()" type="button" class="btn btn-success mt-3">Calcular
+                Pulverización</button>
+
+            <!-- Botón "Guardar Cálculo" -->
+            <button onclick="guardarPulverizacion()" type="button" class="btn btn-primary mt-3">Guardar Cálculo</button>
+
+            <!-- Botón "Borrar lo guardado" -->
+            <button onclick="borrarLoGuardado()" type="button" class="btn btn-danger mt-3">Borrar lo guardado</button>
+
+            <!-- Botón "Mostrar Cálculo Guardado" -->
+
+            <button onclick="recuperarPulverizacionGuardada()" type="button" class="btn btn-info mt-3">Ver
+                lo Guardado</button>
+
+
+            <!-- Botón "Resetear Calculador" -->
+            <button onclick="resetearCalculador()" type="button" class="btn btn-warning mt-3">Resetear
+                Calculador</button>
         </div>
+
+
+        <div class="container">
+            <div class="row justify-content-center"> 
+              <div class="col-lg-6 col-md-8 col-sm-10 col-12">
+                <div class="card text-bg-secondary mt-3">
+                  <h4 class="card-header text-decoration-underline text-center">Agroquímicos//Mezcla</h4>
+                  <img src="assets/img/ShaPID-Keyvisual.jpg" class="card-img-top object-fit-cover border rounded mt-2 img-fluid w-75 mx-auto" alt="....">
+                  <div class="card-body text-dark" id="resultadosContainer">
+                    <!-- Contenido generado por JavaScript -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
     </div>
-    <button onclick="agregarAgroquimico()">Agregar Agroquímico</button>
-
-    <br>
-    <button onclick="calcularPulverizacion()">Calcular Pulverización</button>
-
-    <!-- Botón "Guardar Cálculo" -->
-    <button onclick="guardarPulverizacion()">Guardar Cálculo</button>
-
-    <!-- Botón "Borrar lo guardado" -->
-    <button onclick="borrarLoGuardado()">Borrar lo guardado</button>
-
-    <!-- Botón "Mostrar Cálculo Guardado" -->
-    <div>
-        <button onclick="recuperarPulverizacionGuardada()">Ver lo Guardado</button>
-    </div>
-    <div id="calculoGuardadoContainer"></div>
-
-
-    <!-- Botón "Resetear Calculador" -->
-    <button onclick="resetearCalculador()">Resetear Calculador</button>
-
-    <h2>Resultados</h2>
-    <div id="caldoContainer"></div>
-    <div id="resultadosContainer"></div>
 
     <script src="main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

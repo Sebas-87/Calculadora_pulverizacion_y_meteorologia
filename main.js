@@ -29,7 +29,8 @@ function calcularCantidadCaldo() {
     })
 
     const caldoContainer = document.getElementById("caldoContainer");
-    caldoContainer.innerHTML = `<p>Cantidad de Caldo Necesaria: ${cantidadCaldo.toFixed(2)} litros</p>`;
+    caldoContainer.innerHTML = `<p><u>Cantidad de Caldo Necesaria</u>: <strong>${cantidadCaldo.toFixed(2)} litros</strong></p>
+                                    <p> Para aplicar <strong>${hectareasTotales.toFixed(2)} has</strong></p>`;
 }
 
 const tiposFormulacion = {
@@ -171,10 +172,10 @@ function calcularPulverizacion() {
 
         const resultadoDiv = document.createElement("div");
         resultadoDiv.innerHTML = `
-        <p><strong>Orden de Mezcla en Tanque:</strong> ${ordenMezcla++}</p>
-        <p><strong>Agroquímico:</strong> ${agroquimico.nombre}</p>
-        <p><strong>Formulación:</strong> ${agroquimico.formulacion}</p>
-        <p><strong>Cantidad total:</strong> ${cantidadTotal.replace('.', ',')} ${agroquimico.unidad}</p>
+        <p><strong>#.Orden de Mezcla en Tanque:</strong> ${ordenMezcla++}</p>
+        <p><strong>#.Agroquímico:</strong> ${agroquimico.nombre}</p>
+        <p><strong>#.Formulación:</strong> ${agroquimico.formulacion}</p>
+        <p><strong>#.Cantidad total:</strong> ${cantidadTotal.replace('.', ',')} ${agroquimico.unidad}</p>
         <hr>
       `;
         resultadosContainer.appendChild(resultadoDiv);
@@ -213,8 +214,15 @@ function resetearCalculador() {
   
         const agroquimicosDivs = document.querySelectorAll("#agroquimicosContainer .agroquimico");
         for (const agroquimicoDiv of agroquimicosDivs) {
-          document.getElementById("agroquimicosContainer").removeChild(agroquimicoDiv);
+          const inputsInsideDiv = agroquimicoDiv.querySelectorAll('input');
+          inputsInsideDiv.forEach(input => {
+            if (input.type === 'text' || input.type === 'number') {
+              input.value = '';
+            }
+          });
         }
+        
+        
   
         ordenMezcla = 1;
   
