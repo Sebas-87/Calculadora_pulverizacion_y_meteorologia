@@ -58,14 +58,17 @@ function agregarAgroquimico() {
     const container = document.getElementById("agroquimicosContainer");
 
     const agroquimicoDiv = document.createElement("div");
-    agroquimicoDiv.className = "agroquimico";
+    agroquimicoDiv.innerHTML = "<hr>"
+    agroquimicoDiv.className = "agroquimico mt-3";
 
     const nombreInput = document.createElement("input");
     nombreInput.type = "text";
     nombreInput.placeholder = "Nombre del agroquímico";
+    nombreInput.className = "form-control mb-1";
     agroquimicoDiv.appendChild(nombreInput);
 
     const tipoSelect = document.createElement("select");
+    tipoSelect.className = "form-select";
     for (const tipo in tiposFormulacion) {
         const option = document.createElement("option");
         option.value = tipo;
@@ -77,10 +80,12 @@ function agregarAgroquimico() {
     const cantidadInput = document.createElement("input");
     cantidadInput.type = "number";
     cantidadInput.placeholder = "Cantidad";
+    cantidadInput.className = "form-control mt-4 mb-1"
     agroquimicoDiv.appendChild(cantidadInput);
 
     const unidadSelect = document.createElement("select");
     unidadSelect.id = "unidadDosis";
+    unidadSelect.className = "form-select"
     const litrosOption = document.createElement("option");
     litrosOption.value = "litros";
     litrosOption.textContent = "Litros";
@@ -93,6 +98,7 @@ function agregarAgroquimico() {
 
     const eliminarButton = document.createElement("button");
     eliminarButton.textContent = "Eliminar";
+    eliminarButton.className = "btn btn-danger fw-semibold mt-1"
     eliminarButton.onclick = function () {
         Swal.fire({
             title: 'Confirmar',
