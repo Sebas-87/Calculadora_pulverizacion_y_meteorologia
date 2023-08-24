@@ -1,3 +1,75 @@
+//API -- Open Weather Map
+// Capturar los elementos del DOM, para modificarlos posteriormente
+let containerClima = document.getElementById("container-clima");
+let searchForm = document.getElementById("search__submit");
+let searchInput = document.getElementById("search__input");
+let temperatureDegrees = document.getElementById("degreeNumber");
+let weatherIcon = document.getElementById("weatherIcon");
+let temperatureDescription = document.getElementById("description");
+let timeZone = document.getElementById("timezone");
+let date = document.getElementById("date");
+let min = document.getElementById("min");
+let max = document.getElementById("max");
+
+//Declarar funciones secundarias
+const displayBackgroundImage = (obj) => {
+    //Extraer la hora del objeto que contiene los datos del tiempo
+    let dateSpanish = new Date(obj.dt * 1000).toLocaleString("es-ES", {
+        timeStyle: "short",
+        dateStyle: "long"
+    });
+    // console.log(dateSpanish)
+    //convertirlo a una que entendamos
+    //manipular el DOM para incluir esa hora
+    date.textContent = `${dateSpanish}`
+    //Extraer la hora
+    const dayHour = new Date(obj.dt * 1000).getHours();
+    // console.log(dayHour)
+    //logica
+    if (dayHour > 6 && dayHour < 18) {
+        containerClima.classList.remove("night");
+        containerClima.classList.add("day")
+    } else {
+        containerClima.classList.remove("day");
+        containerClima.classList.add("night")
+    }
+}
+
+const displayData = (obj) => {
+    console.log(obj)
+    temperatureDegrees.textContent = Math.floor(obj.main.temp);
+    timeZone.textContent = obj.name;
+    const icon = obj.weather[0].icon;
+    weatherIcon.innerHTML = `<img src='assets/icons/${icon}.png'></img>`;
+    min.textContent = Math.floor(obj.main.temp_min);
+    max.textContent = Math.floor(obj.main.temp_max);
+    temperatureDescription.textContent = obj.weather[0].description.charAt(0).toUpperCase() + obj.weather[0].description.slice(1);
+}
+
+//Declarar getWeatherData
+const getWeatherData = async (city) => {
+    //Hacer un request a la API y obtener un objeto que contenga los datos
+    const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&lang=sp&appid=05e5ed1aaada07b66128ff1c556cd877`);
+    const data = await res.json();
+    // console.log(data)
+    //Cambiar el fondo de pantalla según sea día o noche
+    displayBackgroundImage(data);
+    //Mostrar los datos en pantalla
+    displayData(data);
+}
+
+searchForm.addEventListener("submit", e => {
+    e.preventDefault();
+    getWeatherData(searchInput.value)
+})
+
+//Al cargar la pagina, inmediatamente nos cargue una ciudad
+window.onload = () => {
+    getWeatherData("Chovet");
+}
+
+
+
 // Función para calcular la cantidad de caldo total.
 function calcularCantidadCaldo() {
     const hectareasTotales = parseFloat(document.getElementById("hectareasTotales").value);

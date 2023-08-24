@@ -8,9 +8,140 @@ body {
     background-color: black;
 }
 
+.container-clima {
+    height: 32.8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.container-clima.day {
+    background-image: url(assets/img/img_day_3.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.container-clima.night {
+    background-image: url(assets/img/img_night.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.inputTemp {
+    margin: 1rem auto;
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    flex: 0.4;
+}
+
+.search__submit {
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+.search__submit > button {
+    visibility: hidden;
+}
+
+.search{
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: none;
+}
+
+.search:focus {
+    outline: none;
+}
+
+.inputTemp__number {
+    display: flex;
+    align-items: center;
+}
+
+.inputTemp__celsius {
+    text-align: center;
+    color: white;
+    font-weight: bolder;
+    font-size: 3.5rem;
+}
+
+.inputTemp__symbol {
+    font-size: 2.5rem;
+    color: white;
+}
+
+.location {
+    flex: 0.5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.location__date {
+    margin: 1.5rem;
+    font-weight: bold;
+
+}
+
+.inputTemp__description, .location__city {
+    font-size: 1.8rem;
+    font-weight: bolder;
+    color: #181717;
+}
+
+.container-clima.night .inputTemp__description {
+    color: white;
+}
+
+.container-clima.night .location__city {
+    color: white;
+}
+
+.container-clima.night .weather__min, .container-clima.night .weather__max {
+    color: white;
+}
+
+.container-clima.night .location__date {
+    color: white;
+    font-weight: bolder;
+}
+
+.weather {
+    flex: 0.2;
+    border-top: 2px solid #333;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-weight: bold;
+}
+
+.weather__min >span {
+    font-size: 1.8rem;
+    font-weight: bolder;
+    color: blue;
+}
+
+.weather__max >span {
+    font-size: 1.8rem;
+    font-weight: bolder;
+    color: red;
+}
+
 .img-container {
     background-image: url(assets/img/img4_comp_pulv.webp);
     background-size: cover;
+}
+
+.linea-divisoria {
+    color: inherit;
+    border: 0;
 }
 
 hr {

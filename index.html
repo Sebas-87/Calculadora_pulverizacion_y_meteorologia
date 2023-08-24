@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Calculadora de Pulverizacion</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
@@ -12,6 +12,29 @@
 </head>
 
 <body>
+    <div class="container container-clima" id="container-clima">
+        <div class="inputTemp">
+            <form class="search__submit" id="search__submit">
+                <input type="text" class="search" id="search__input" placeholder="Entra tu localizacón ....">
+                <button type="submit"></button>
+            </form>
+            <div class="inputTemp__number">
+                <div class="inputTemp__celsius" id="degreeNumber"></div>
+                <div class="inputTemp__symbol">ºC</div>
+            </div>
+            <div id="weatherIcon"></div>
+            <div class="inputTemp__description" id="description"></div>
+        </div>
+        <div class="location">
+            <div class="location__city" id="timezone"></div>
+            <div class="location__date" id="date"></div>
+        </div>
+        <div class="weather">
+            <div class="weather__min">min <span id="min"></span> ºC</div>
+            <div class="weather__max">max <span id="max"></span> ºC</div>
+        </div>
+    </div>
+    <hr class="linea-divisoria">
     <div class="container-md p-4 img-container">
         <h1 class="text-center mt-4">Calculadora de Pulverización</h1>
 
@@ -28,14 +51,16 @@
                     <input type="number" id="litrosPorHectarea" min="0" step="0.01" class="form-control"
                         aria-label="Dosis por hectarea">
                 </div>
-                <button onclick="calcularCantidadCaldo()" type="button" class="btn btn-success fw-semibold mt-3">Calcular Cantidad
+                <button onclick="calcularCantidadCaldo()" type="button"
+                    class="btn btn-success fw-semibold mt-3">Calcular Cantidad
                     de
                     Caldo</button>
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-lg-6 col-md-8 col-sm-10 col-12">
                             <div class="card text-bg-secondary mt-3">
-                                <h4 class="card-header text-decoration-underline text-dark fw-semibold">Tanque del pulverizador</h4>
+                                <h4 class="card-header text-decoration-underline text-dark fw-semibold">Tanque del
+                                    pulverizador</h4>
                                 <img src="assets/img/tank_level.webp"
                                     class="card-img-top object-fit-cover border rounded mt-2 img-fluid w-75 mx-auto"
                                     alt="gotas simulando nivel de agua en tanque
@@ -88,26 +113,26 @@
 
             <hr>
 
-                <!-- Botón "Calcular Pulveriación" -->
-                <button onclick="calcularPulverizacion()" type="button" class="btn btn-success fw-semibold mt-3">Calcular
-                    Pulverización</button>
+            <!-- Botón "Calcular Pulveriación" -->
+            <button onclick="calcularPulverizacion()" type="button" class="btn btn-success fw-semibold mt-3">Calcular
+                Pulverización</button>
 
-                <!-- Botón "Guardar Cálculo" -->
-                <button onclick="guardarPulverizacion()" type="button" class="btn btn-primary fw-semibold mt-3">Guardar
-                    Cálculo</button>
+            <!-- Botón "Guardar Cálculo" -->
+            <button onclick="guardarPulverizacion()" type="button" class="btn btn-primary fw-semibold mt-3">Guardar
+                Cálculo</button>
 
-                <!-- Botón "Borrar lo guardado" -->
-                <button onclick="borrarLoGuardado()" type="button" class="btn btn-danger fw-semibold mt-3">Borrar lo
-                    guardado</button>
-                
-                <!-- Botón "Mostrar Cálculo Guardado" -->   
-                <button onclick="recuperarPulverizacionGuardada()" type="button" class="btn btn-info fw-semibold mt-3">Ver
-                    lo Guardado</button>
+            <!-- Botón "Borrar lo guardado" -->
+            <button onclick="borrarLoGuardado()" type="button" class="btn btn-danger fw-semibold mt-3">Borrar lo
+                guardado</button>
 
-                <!-- Botón "Resetear Calculador" -->
-                <button onclick="resetearCalculador()" type="button" class="btn btn-warning fw-semibold mt-3">Resetear
-                    Calculador</button>
-            
+            <!-- Botón "Mostrar Cálculo Guardado" -->
+            <button onclick="recuperarPulverizacionGuardada()" type="button" class="btn btn-info fw-semibold mt-3">Ver
+                lo Guardado</button>
+
+            <!-- Botón "Resetear Calculador" -->
+            <button onclick="resetearCalculador()" type="button" class="btn btn-warning fw-semibold mt-3">Resetear
+                Calculador</button>
+
         </div>
 
 
@@ -115,9 +140,11 @@
             <div class="row justify-content-center">
                 <div class="col-lg-6 col-md-8 col-sm-10 col-12">
                     <div class="card text-bg-secondary mt-3">
-                        <h4 class="card-header text-decoration-underline text-center text-dark fw-semibold">Agroquímicos//Mezcla</h4>
+                        <h4 class="card-header text-decoration-underline text-center text-dark fw-semibold">
+                            Agroquímicos//Mezcla</h4>
                         <img src="assets/img/ShaPID-Keyvisual.jpg"
-                            class="card-img-top object-fit-cover border rounded mt-2 img-fluid w-75 mx-auto" alt="imagen quimicos y accesorios">
+                            class="card-img-top object-fit-cover border rounded mt-2 img-fluid w-75 mx-auto"
+                            alt="imagen quimicos y accesorios">
                         <div class="card-body text-dark" id="resultadosContainer">
                             <!-- Contenido generado por medio de JavaScript -->
                         </div>
@@ -127,8 +154,10 @@
         </div>
 
         <div class="d-grid gap-2 col-6 mx-auto">
-            <button id="descargarButton" type="button" class="btn btn-info text-dark fw-semibold mt-3">Descargar Resultados</button>
-            <button id="compartirWhatsappButton" type="button" class="btn btn-success text-warning fw-semibold mt-3">Compartir en WhatsApp</button>
+            <button id="descargarButton" type="button" class="btn btn-info text-dark fw-semibold mt-3">Descargar
+                Resultados</button>
+            <button id="compartirWhatsappButton" type="button"
+                class="btn btn-success text-warning fw-semibold mt-3">Compartir en WhatsApp</button>
         </div>
 
     </div>
